@@ -4,8 +4,13 @@ import { storage } from "./storage";
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from 'url';
 import { z } from "zod";
 import { cropSuggestionFormSchema, insertProductSchema, insertInvestmentSchema, insertUserInvestmentSchema } from "@shared/schema";
+
+// Define __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Routes for Crop Price Prediction
