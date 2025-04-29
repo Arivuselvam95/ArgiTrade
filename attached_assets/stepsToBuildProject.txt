@@ -1,0 +1,56 @@
+hey bro here  want ot create a complete application for my final year project which is used to enhance the agriculture and farming.
+
+here we have 3 modules:
+1. price predition :
+=>core logic:
+->this is like analysing the historical data and predict the demandable and profitable crop and predict price of crop in next financial year.
+->for this we have a dataset for each crop in our mongodb table name:"price-data" with columns "crop_name,month,year,rainfall(mm),wpi" 
+->we suggest random forest to done it.
+=>frontend view:
+->it want to show most demadable crops and profitable crops with profit percentage
+->below to that list of crops with current price and predicted price , gain or loss with arrow representation
+
+
+2.reginal based crop selection:
+=>core logic:
+->get the data input from user in form .
+->display top 5 suitable crop with expected profit and current growth in price
+->from should display  drop list to select districs in tamilnadu:"Ariyalur, Chengalpattu, Chennai, Coimbatore, Cuddalore, Dharmapuri, Dindigul, Erode, Kallakurichi, Karur, Krishnagiri, Madurai, Mayiladuthurai, Nagapattinam, Namakkal, Nilgiris, Perambalur, Pudukkottai, Ramanathapuram, Ranipet, Salem, Sivaganga, Tenkasi, Thanjavur, Theni, Thoothukudi, Tiruchirappalli, Tirunelveli, Tirupathur, Tiruppur, Tiruvallur, Tiruvannamalai, Tiruvarur, Vellore, Viluppuram, Virudhunagar."
+-> after select distric , we have a dataset in mongodb tablename :"regional-data" with column "district,avg_wind_speed(kmph),avg_temp(°C),weather_patterns,major_soil_type1,soil1_ph,soil1_nitrogen,soil1_phosphorus,soil1_potassium,major_soil_type2,soil2_ph,soil2_nitrogen,soil2_phosphorus,soil2_potassium" pick some suitable parameters from this.
+->main parrameters are "soil type, ph level, wind ,tempearature,nutrients" 
+->make the form more realable and meaningful
+->after submitting the form it should analyse the input and suggest the suitable crops for them , for this analisis we have another dataset in mongodb table name:"crop-data" with column name"crop_name,temp_min,temp_max,rainfall_min,rainfall_max,humidity_min,humidity_max,wind_speed_min,wind_speed_max,ph_min,ph_max,nitrogen,phosphorus,potassium,soil_type_encoded,region_encoded,season_encoded,growing_days", we suggest random forest to predict this.
+
+=>frontend view:
+->meaningful and easy to fill form 
+->create to ui to display suggested crop with nessary details like "current price, future predicted , profit percentage , and expected yield per feild"
+
+
+
+3.farm Hub:
+here i want to split it into 2 parts.
+i)
+->a trade place for the agriculture like "upstocks" . here farmer with release their shares on open forum here investers can buy the shares and take part of the agri business.
+->everthing should be in rupees
+->show historical profit of the crop or the farmer to insvestor.
+->have a option to create a business in app for farmers to create a new agri.
+
+ii)
+->it is a vendor side ecommerce for agriculture.
+->here farmers will post the available agricultural products
+->they can customize the price with in limit provided to that product
+
+
+thats all about our moduls.
+
+
+
+tech to use: complete Mern stack project, with python for ml work use this py with rest api call from frontend react+vite .create new collection as u needed in my db
+
+
+note:use only javascript for scripting , use tailwind css, responsivedesign,teal and light green color palets
+
+credential:
+MONGODB_URI=mongodb+srv://arivuselvam439:ari952005@cluster0.srvel.mongodb.net/AgriTrade
+
+

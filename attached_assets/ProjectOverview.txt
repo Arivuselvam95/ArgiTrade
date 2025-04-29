@@ -1,0 +1,127 @@
+PROBLEM STATEMENT AND PROPOSED SYSTEM
+
+3.1 INTRODUCTION
+
+The agricultural sector in India is burdened by unpredictable crop prices, improper crop selection due to lack of regional environmental considerations, inefficient soil health monitoring, and post-harvest wastage due to poor market access. This project proposes an integrated solution combining predictive analytics, regional farming recommendations, and a digital farm commerce platform to address these challenges.
+
+3.2 PROBLEM STATEMENT
+
+Farmers face uncertainty regarding crop demand and selling prices, leading to confusion about profitability.
+
+Current crop selection systems do not consider critical regional environmental parameters.
+
+Late-stage disease detection necessitates non-organic fertilizers, harming soil health.
+
+A significant percentage of vegetables (about 24%) are wasted annually due to inefficient farmer-buyer communication.
+
+3.3 PROPOSED SYSTEM
+
+The proposed solution incorporates three major modules:
+
+Crop Price Prediction:
+
+Collect historical crop price data.
+
+Analyze environmental factors like weather conditions.
+
+Use Random Forest machine learning algorithms to predict crop price, demand, and profitability.
+
+Regional Based Crop Suggestion:
+
+Parameters Considered:
+
+Wind speed (collected via APIs)
+
+Weather conditions (collected via APIs)
+
+Temperature (collected via APIs)
+
+Soil pH Level (entered manually after lab testing)
+
+Soil Nutrition Level (entered manually after lab testing)
+
+Suggest optimal crops based on these parameters.
+
+Provide complete agricultural guidance from planning to harvest.
+
+Farm Hub:
+
+(a) E-Commerce for Farmers:
+
+Farmers list available products.
+
+Buyers, either individuals or shop owners, purchase directly from farmers.
+
+Integrated transportation service with GPS tracking for efficient delivery.
+
+(b) Agri-Trade Platform:
+
+Farmers can list shares of their crops for investment after verification.
+
+Investors can purchase shares, sharing in the business's profits and losses proportionally.
+
+3.4 ADVANTAGES OF PROPOSED SYSTEM
+
+Predictable market insights for farmers.
+
+Optimized crop selection based on real-time data.
+
+Efficient resource utilization and smart irrigation.
+
+Promotion of organic farming practices.
+
+Reduction of vegetable wastage.
+
+Creation of new investment opportunities in agriculture.
+
+3.5 MODULES OF PROPOSED SYSTEM
+
+MODULE 1: CROP PRICE PREDICTION
+
+Historical market data collection.
+
+Weather data integration.
+
+Predictive model creation using Random Forest algorithm.
+
+Forecast crop prices, demands, and estimated profits.
+
+MODULE 2: REGIONAL BASED CROP SUGGESTION
+
+Fetch wind speed, weather conditions, and temperature data from APIs.
+
+Input soil pH and nutrition data after lab testing.
+
+Analyze parameters and suggest suitable crops.
+
+Provide farmers with detailed guides for crop cultivation.
+
+MODULE 3: FARM HUB
+
+E-Commerce for Farmers:
+
+Direct marketplace for selling crops.
+
+Transportation facility integrated with live tracking.
+
+Agri-Trade:
+
+Platform for crop share trading.
+
+Investment and profit/loss sharing based on ownership percentage.
+
+3.6 TECHNOLOGY STACK
+
+Frontend: React.js (with Vite)
+
+Backend: Node.js, Express.js
+
+Database: MongoDB
+
+Machine Learning: Python (Random Forest)
+
+External APIs: Weather and environmental data APIs
+
+3.7 SUMMARY
+
+The Smart AgriTech Platform offers a multi-pronged solution for improving Indian agriculture. By leveraging machine learning, external APIs, and modern web technologies, the project aims to empower farmers with better decision-making tools, direct market access, sustainable practices, and innovative financial models. This holistic system is a step toward a sustainable and profitable agricultural future.
