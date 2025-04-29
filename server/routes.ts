@@ -98,8 +98,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = cropSuggestionFormSchema.parse(req.body);
       
       // Get regional data for the district
-      const { model: regionalModel } = await import("./models/Regional");
-      const regionalData = await regionalModel.findOne({ district: validatedData.district }).lean();
+      const regionalData = await storage.getRegionalDataByDistrict(validatedData.district);
       
       if (!regionalData) {
         return res.status(404).json({ message: "District data not found" });
@@ -111,9 +110,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Combine form data with regional data for analysis
       const analysisData = {
         ...validatedData,
-        avgWindSpeed: regionalData.avg_wind_speed,
-        avgTemp: regionalData.avg_temp,
-        weatherPatterns: regionalData.weather_patterns,
+        avgWindSpeed: regionalData.avgWindSpeed,
+        avgTemp: regionalData.avgTemp,
+        weatherPatterns: regionalData.weatherPatterns,
       };
       
       const process = spawn("python", [scriptPath, JSON.stringify(analysisData)]);
@@ -137,11 +136,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const results = JSON.parse(dataString);
           
           // Fetch additional data for each suggested crop
-          const { model: priceModel } = require("./models/PriceData");
           Promise.all(results.suggestedCrops.map(async (crop: any) => {
-            const priceData = await priceModel.findOne({ crop_name: crop.name }).lean();
+            // Get price data for this crop from storage
+            const priceDatas = await storage.getPriceDataByCrop(crop.name);
+            const priceData = priceDatas.length > 0 ? priceDatas[priceDatas.length - 1] : null;
+            
             crop.currentPrice = priceData?.price || 0;
-            crop.predictedPrice = priceData?.price * (1 + (crop.profitMargin / 100)) || 0;
+            crop.predictedPrice = priceData?.price ? priceData.price * (1 + (crop.profitMargin / 100)) : 0;
             return crop;
           }))
           .then(completedCrops => {
@@ -171,32 +172,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { category, minPrice, maxPrice, location } = req.query;
       
-      const { model } = await import("./models/Product");
-      let query: any = { isAvailable: true };
+      // Get all products from storage
+      let products = await storage.getProducts();
+      
+      // Filter products based on query parameters
+      // Only return available products
+      products = products.filter(product => product.isAvailable);
       
       if (category && category !== "All Categories") {
-        query.category = category;
+        products = products.filter(product => product.category === category);
       }
       
       if (minPrice && !isNaN(Number(minPrice))) {
-        query.price = { $gte: Number(minPrice) };
+        products = products.filter(product => product.price >= Number(minPrice));
       }
       
       if (maxPrice && !isNaN(Number(maxPrice))) {
-        if (query.price) {
-          query.price.$lte = Number(maxPrice);
-        } else {
-          query.price = { $lte: Number(maxPrice) };
-        }
+        products = products.filter(product => product.price <= Number(maxPrice));
       }
       
       if (location && location !== "All Locations") {
-        // This would need a more complex geospatial query in a real application
-        // Simplified for this example
-        query.location = location;
+        products = products.filter(product => product.location === location);
       }
-      
-      const products = await model.find(query).lean();
       
       res.json(products);
     } catch (error) {
@@ -209,9 +206,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertProductSchema.parse(req.body);
       
-      const { model } = await import("./models/Product");
-      const newProduct = new model(validatedData);
-      await newProduct.save();
+      // Create new product in storage
+      const newProduct = await storage.createProduct(validatedData);
       
       res.status(201).json(newProduct);
     } catch (error) {
@@ -226,10 +222,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Routes for Farm Hub - Agri-Trade
   app.get("/api/investments", async (req, res) => {
     try {
-      const { model } = await import("./models/Investment");
-      const investments = await model.find({ isActive: true }).lean();
+      // Get all investments from storage
+      const investments = await storage.getInvestments();
       
-      res.json(investments);
+      // Filter only active investments
+      const activeInvestments = investments.filter(investment => investment.isActive);
+      
+      res.json(activeInvestments);
     } catch (error) {
       console.error("Error fetching investments:", error);
       res.status(500).json({ message: "Error fetching investments" });
@@ -240,9 +239,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertInvestmentSchema.parse(req.body);
       
-      const { model } = await import("./models/Investment");
-      const newInvestment = new model(validatedData);
-      await newInvestment.save();
+      // Create new investment in storage
+      const newInvestment = await storage.createInvestment(validatedData);
       
       res.status(201).json(newInvestment);
     } catch (error) {
@@ -324,10 +322,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 function processPriceData(priceData: any[]) {
   // Group by crop
   const cropGroups = priceData.reduce((acc: any, item: any) => {
-    if (!acc[item.crop_name]) {
-      acc[item.crop_name] = [];
+    if (!acc[item.cropName]) {
+      acc[item.cropName] = [];
     }
-    acc[item.crop_name].push(item);
+    acc[item.cropName].push(item);
     return acc;
   }, {});
   
