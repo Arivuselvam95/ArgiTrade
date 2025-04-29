@@ -119,8 +119,12 @@ def load_crop_data():
 
 # Function to check crop suitability
 def check_crop_suitability(crop, input_data):
-    # Check temperature suitability
-    temp_suitable = crop["temp_min"] <= input_data["avgTemp"] <= crop["temp_max"]
+    # Print input data for debugging
+    print(f"Debug - Input data: {json.dumps(input_data)}", file=sys.stderr)
+    
+    # Check temperature suitability with default if not present
+    avg_temp = input_data.get("avgTemp", 28)  # Default value
+    temp_suitable = crop["temp_min"] <= avg_temp <= crop["temp_max"]
     
     # Check pH suitability
     ph_suitable = crop["ph_min"] <= input_data["phLevel"] <= crop["ph_max"]
@@ -128,13 +132,18 @@ def check_crop_suitability(crop, input_data):
     # Check soil type suitability
     soil_suitable = input_data["soilType"] in crop["soil_types"]
     
-    # Check wind speed suitability
-    wind_suitable = crop["wind_speed_min"] <= input_data["avgWindSpeed"] <= crop["wind_speed_max"]
+    # Check wind speed suitability with default if not present
+    avg_wind_speed = input_data.get("avgWindSpeed", 5)  # Default value
+    wind_suitable = crop["wind_speed_min"] <= avg_wind_speed <= crop["wind_speed_max"]
     
-    # Check nutrient suitability
-    nitrogen_suitable = abs(crop["nitrogen"] - input_data["nitrogen"]) <= 50
-    phosphorus_suitable = abs(crop["phosphorus"] - input_data["phosphorus"]) <= 40
-    potassium_suitable = abs(crop["potassium"] - input_data["potassium"]) <= 50
+    # Check nutrient suitability - use defaults if not provided
+    nitrogen = input_data.get("nitrogen", 100)  # Default value
+    phosphorus = input_data.get("phosphorus", 70)  # Default value
+    potassium = input_data.get("potassium", 90)  # Default value
+    
+    nitrogen_suitable = abs(crop["nitrogen"] - nitrogen) <= 50
+    phosphorus_suitable = abs(crop["phosphorus"] - phosphorus) <= 40
+    potassium_suitable = abs(crop["potassium"] - potassium) <= 50
     
     # Calculate overall suitability score (0-3)
     suitability_factors = [
