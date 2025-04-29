@@ -30,7 +30,7 @@ def load_crop_data():
             "wind_speed_min": 2, "wind_speed_max": 10,
             "ph_min": 5.5, "ph_max": 7.5,
             "nitrogen": 100, "phosphorus": 80, "potassium": 120,
-            "soil_types": ["Red", "Loamy"],
+            "soil_types": ["Red", "Loamy", "Clay", "Black", "Sandy", "Alluvial"],
             "growing_days": 90,
             "expected_yield": "25-30 ton/hectare",
             "profit_margin": 22.1
@@ -95,7 +95,7 @@ def load_crop_data():
             "wind_speed_min": 2, "wind_speed_max": 10,
             "ph_min": 5.5, "ph_max": 7.0,
             "nitrogen": 110, "phosphorus": 70, "potassium": 130,
-            "soil_types": ["Red", "Loamy"],
+            "soil_types": ["Red", "Loamy", "Clay", "Black", "Sandy", "Alluvial"],
             "growing_days": 75,
             "expected_yield": "10-12 ton/hectare",
             "profit_margin": 16.2
@@ -108,7 +108,7 @@ def load_crop_data():
             "wind_speed_min": 2, "wind_speed_max": 10,
             "ph_min": 5.5, "ph_max": 7.5,
             "nitrogen": 100, "phosphorus": 60, "potassium": 120,
-            "soil_types": ["Red", "Loamy"],
+            "soil_types": ["Red", "Loamy", "Clay", "Black", "Sandy", "Alluvial"],
             "growing_days": 85,
             "expected_yield": "25-30 ton/hectare",
             "profit_margin": 15.8
