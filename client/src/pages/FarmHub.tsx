@@ -49,20 +49,21 @@ const FarmHub = () => {
         <div className="bg-white rounded-lg shadow">
           <div className="border-b border-slate-200">
             <TabsList className="w-full h-auto border-0 bg-transparent rounded-none">
-              <TabsTrigger 
-                value="marketplace" 
-                className="flex-1 py-4 px-1 data-[state=active]:text-primary-600 data-[state=active]:border-primary-500 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-500 data-[state=inactive]:hover:text-slate-700 data-[state=inactive]:hover:border-slate-300 whitespace-nowrap font-medium text-sm rounded-none"
-              >
-                <i className="ri-store-2-line mr-1"></i>
-                Marketplace
-              </TabsTrigger>
-              <TabsTrigger 
-                value="agri-trade" 
-                className="flex-1 py-4 px-1 data-[state=active]:text-primary-600 data-[state=active]:border-primary-500 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-500 data-[state=inactive]:hover:text-slate-700 data-[state=inactive]:hover:border-slate-300 whitespace-nowrap font-medium text-sm rounded-none"
-              >
-                <i className="ri-exchange-line mr-1"></i>
-                Agri-Trade
-              </TabsTrigger>
+            <TabsTrigger 
+              value="marketplace" 
+              className="flex-1 py-4 px-1 data-[state=active]:text-emerald-600 data-[state=active]:border-emerald-500 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-500 data-[state=inactive]:hover:text-slate-700 data-[state=inactive]:hover:border-slate-300 whitespace-nowrap font-medium text-sm rounded-none"
+            >
+              <i className="ri-store-2-line mr-1"></i>
+              Marketplace
+            </TabsTrigger>
+            <TabsTrigger 
+            value="agri-trade" 
+            className="flex-1 py-4 px-1 data-[state=active]:text-indigo-600 data-[state=active]:border-indigo-500 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-500 data-[state=inactive]:hover:text-slate-700 data-[state=inactive]:hover:border-slate-300 whitespace-nowrap font-medium text-sm rounded-none"
+          >
+            <i className="ri-exchange-line mr-1"></i>
+            Agri-Trade
+          </TabsTrigger>
+
             </TabsList>
           </div>
         </div>

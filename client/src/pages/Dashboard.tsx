@@ -60,20 +60,20 @@ const Dashboard = () => {
         <ModuleCard
           title="Crop Price Prediction"
           description="Analyze historical data to predict crop prices and profitability."
-          icon="ri-line-chart-line"
-          bgColorFrom="from-primary-500"
-          bgColorTo="to-primary-600"
+          icon="ri-bar-chart-2-line"
+          bgColorFrom="from-yellow-500"
+          bgColorTo="to-yellow-600"
           linkPath="/price-prediction"
-          linkColor="text-primary-500"
+          linkColor="text-yellow-500"
         />
         <ModuleCard
           title="Regional Crop Suggestion"
           description="Get personalized crop recommendations based on local conditions."
-          icon="ri-plant-line"
-          bgColorFrom="from-secondary-500"
-          bgColorTo="to-secondary-600"
+          icon="ri-map-pin-line"
+          bgColorFrom="from-green-500"
+          bgColorTo="to-green-600"
           linkPath="/crop-suggestion"
-          linkColor="text-secondary-500"
+          linkColor="text-green-500"
         />
         <ModuleCard
           title="Farm Hub"

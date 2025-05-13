@@ -3,7 +3,7 @@ import { Investment } from "@/types";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import InvestmentCard from "./InvestmentCard";
-import Pagination from "@/components/ui/Pagination";
+import {Pagination} from "@/components/ui/pagination";
 
 interface InvestmentListProps {
   investments: Investment[];

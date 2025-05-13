@@ -3,7 +3,7 @@ import { Product, ProductFilters } from "@/types";
 import ProductCard from "./ProductCard";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Pagination from "@/components/ui/Pagination";
+import {Pagination} from "@/components/ui/pagination";
 
 interface ProductListProps {
   products: Product[];

@@ -211,7 +211,7 @@ const SuggestionForm: React.FC<SuggestionFormProps> = ({
                 </Button>
                 <Button 
                   type="submit" 
-                  className="ml-3 px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                  className="ml-3 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   disabled={isLoading}
                 >
                   {isLoading ? "Analyzing..." : "Get Suggestions"}
